@@ -75,22 +75,24 @@ class MainActivity : AppCompatActivity() {
         var nameMatch = false
         var passMatch = false
 
+        // check if enteredname is same as what is saved in shared preference
         if (enteredName == userName){
             nameMatch = true
+            // check if enteredpass is same as what is saved in shared preferences
+            if (enteredPass == userPass){
+                passMatch = true
+            }else {
+                if (enteredPass.isEmpty()){
+                    Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(this, "Incorrect password", Toast.LENGTH_SHORT).show()
+                }
+            }
         }else {
             if (enteredName.isEmpty()){
                 Toast.makeText(this, "Please enter a user name", Toast.LENGTH_SHORT).show()
             }else {
                 Toast.makeText(this, "Unknown user name", Toast.LENGTH_SHORT).show()
-            }
-        }
-        if (enteredPass == userPass){
-            passMatch = true
-        }else {
-            if (enteredPass.isEmpty()){
-                Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show()
-            }else {
-                Toast.makeText(this, "Incorrect password", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -103,16 +105,19 @@ class MainActivity : AppCompatActivity() {
         var nameFilled = false
         var passFilled = false
 
+        // check if something is entered in username field
         if (enteredName.isEmpty()){
             Toast.makeText(this, "Please enter a user name", Toast.LENGTH_SHORT).show()
         }else {
             nameFilled = true
+            // check if something is in the password field
+            if (enteredPass.isEmpty()){
+                Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show()
+            }else {
+                passFilled = true
+            }
         }
-        if (enteredPass.isEmpty()){
-            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show()
-        }else {
-            passFilled = true
-        }
+
 
         return (nameFilled && passFilled)
     }
