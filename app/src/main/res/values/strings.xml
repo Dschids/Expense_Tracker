@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Expense Tracker</string>
+    <string name="text_username">Username</string>
+    <string name="text_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="user_hint">Enter username</string>
+    <string name="pass_hint">Enter password</string>
+    <string name="text_total_Expenses">Total Expenses: </string>
+
+    <string name="my_set_file">My_Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
