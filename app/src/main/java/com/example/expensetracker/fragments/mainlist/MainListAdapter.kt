@@ -1,19 +1,29 @@
 package com.example.expensetracker.fragments.mainlist
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expensetracker.databinding.CustomExpCatListBinding
 import com.example.expensetracker.model.Expense
+import java.text.DecimalFormat
 
+var grandTotal: Double = 0.00
 class MainListAdapter: RecyclerView.Adapter<MainListAdapter.MyViewHolder>() {
 
     private var expCatsList = arrayListOf("Housing", "Transportation", "Utilities", "Food", "Entertainment", "Other")
     private var expenseList = emptyList<Expense>()
+
     class MyViewHolder(val _binding: CustomExpCatListBinding): RecyclerView.ViewHolder(_binding.root) {
-        fun bind(ourItem: String){
+
+        fun bind(ourItem: String, ourAmount: Double){
+            var dec = DecimalFormat("#,###.00")
+            var formatted = dec.format(ourAmount)
+            grandTotal += ourAmount
+            Log.d(TAG, "bind: $grandTotal")
             _binding.tvExpCat.text = ourItem
+            _binding.tvTotalAmount.text = "$ $formatted"
         }
     }
 
@@ -28,7 +38,10 @@ class MainListAdapter: RecyclerView.Adapter<MainListAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = expCatsList[position]
-        holder.bind(currentItem)
+        var currentAmount = getTotal(currentItem)
+
+        holder.bind(currentItem, currentAmount)
+
 
         // holder._binding.expCatLayout.setOnClickListener{
             // passing the data from the item in the list to the update fragment
@@ -40,5 +53,16 @@ class MainListAdapter: RecyclerView.Adapter<MainListAdapter.MyViewHolder>() {
     fun setData (expense: List<Expense>){
         this.expenseList = expense
         notifyDataSetChanged()
+    }
+
+    fun getTotal(category: String): Double{
+        var total = 0.00
+        for (item in expenseList){
+            if (item.expenseType == category){
+                total += item.amount
+            }
+
+        }
+        return total
     }
 }

@@ -11,7 +11,7 @@
 
 
     <string name="exp_type_title">Expense Category</string>
-    <string-array name = "expense_type" >
+    <string-array name="expense_type">
         <item>Housing</item>
         <item>Transportation</item>
         <item>Utilities</item>
@@ -26,5 +26,7 @@
     <string name="amount_hint">The amount paid</string>
     <string name="desc_hint">What you bought/paid for</string>
     <string name="add_btn">Add Expense</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -9,7 +9,7 @@ class Expense (
     val id: Int,
     val expenseType: String,
     val business: String,
-    val amount: Float,
+    val amount: Double,
     val description: String
 ) {
 }

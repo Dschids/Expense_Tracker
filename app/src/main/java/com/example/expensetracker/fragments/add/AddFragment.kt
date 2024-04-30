@@ -2,11 +2,11 @@ package com.example.expensetracker.fragments.add
 
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.expensetracker.R
@@ -39,7 +39,7 @@ class AddFragment : Fragment() {
         // get strings from edit text boxes
         val expCategory = _add_binding.spExpenseType.selectedItem.toString()
         val business = _add_binding.etBusName.text.toString()
-        val amount = _add_binding.etExpAmount.text.toString().toFloat()
+        val amount = _add_binding.etExpAmount.text.toString().toDouble()
         val description = _add_binding.etExpDescr.text.toString()
 
         // if there is data in all three boxes
@@ -56,7 +56,7 @@ class AddFragment : Fragment() {
 
     }
 
-    private fun inputCheck(expCategory: String, busName: String, amount: Float, descr: String): Boolean {
+    private fun inputCheck(expCategory: String, busName: String, amount: Double, descr: String): Boolean {
         return !(TextUtils.isEmpty(expCategory) && TextUtils.isEmpty(busName) && TextUtils.isEmpty(amount.toString()) && TextUtils.isEmpty(descr))
     }
 

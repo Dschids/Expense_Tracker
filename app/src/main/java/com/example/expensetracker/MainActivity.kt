@@ -8,10 +8,6 @@ import com.example.expensetracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    /* initilize shared preferences out here so it can be used in several functions without having
-    * to re-initialize each time
-    */
-
     private lateinit var _main_binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
