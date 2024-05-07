@@ -1,19 +1,14 @@
 package com.example.expensetracker.fragments.speccatlist
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expensetracker.R
 import com.example.expensetracker.databinding.FragmentMainListBinding
-import com.example.expensetracker.fragments.mainlist.MainListAdapter
 import com.example.expensetracker.model.Expense
 import com.example.expensetracker.viewmodel.ExpenseViewModel
 import java.text.DecimalFormat
@@ -50,6 +45,7 @@ class SpecCatListFragment : Fragment() {
                     calculateTotal(expense, args.expenseType.type)
         }
 
+        _cat_list_binding.fabAddExp.visibility
 
         return view
     }
