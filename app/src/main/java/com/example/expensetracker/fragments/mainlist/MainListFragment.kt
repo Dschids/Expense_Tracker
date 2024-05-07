@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expensetracker.R
 import com.example.expensetracker.databinding.FragmentAddBinding
 import com.example.expensetracker.databinding.FragmentMainListBinding
+import com.example.expensetracker.model.Expense
 import com.example.expensetracker.viewmodel.ExpenseViewModel
+import java.text.DecimalFormat
 
 
 class MainListFragment : Fragment() {
@@ -39,12 +41,23 @@ class MainListFragment : Fragment() {
         eclUserViewModel = ViewModelProvider(this).get(ExpenseViewModel::class.java)
         // observes for changes and updates the list when there are any
         eclUserViewModel.readAllData.observe(viewLifecycleOwner){
-                user ->
+                expense ->
             // calls the setData function from ListAdapter
-            adapter.setData(user)
+            adapter.setData(expense)
+            calculateTotal(expense)
         }
 
 
         return view
+    }
+    private fun calculateTotal(expenses: List<Expense>) {
+        var total: Double = 0.00
+        for (item in expenses) {
+            total = +item.amount
+        }
+
+        var dec = DecimalFormat("#,###.00")
+        var formatted = dec.format(total)
+        _main_list_binding.tvTotExpense.text = "$ $formatted"
     }
 }

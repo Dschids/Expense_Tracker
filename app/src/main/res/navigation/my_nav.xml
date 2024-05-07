@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainListFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_mainListFragment_to_specCatListFragment"
+            app:destination="@id/specCatListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -22,5 +25,32 @@
         <action
             android:id="@+id/action_addFragment_to_mainListFragment"
             app:destination="@id/mainListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/specCatListFragment"
+        android:name="com.example.expensetracker.fragments.speccatlist.SpecCatListFragment"
+        android:label="fragment_spec_cat_list"
+        tools:layout="@layout/fragment_spec_cat_list" >
+        <action
+            android:id="@+id/action_specCatListFragment_to_mainListFragment"
+            app:destination="@id/mainListFragment" />
+        <argument
+            android:name="expenseType"
+            app:argType="com.example.expensetracker.model.ExpenseTypes" />
+        <action
+            android:id="@+id/action_specCatListFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.expensetracker.fragments.update.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_specCatListFragment"
+            app:destination="@id/specCatListFragment" />
+        <argument
+            android:name="expenseItem"
+            app:argType="com.example.expensetracker.model.Expense" />
     </fragment>
 </navigation>
