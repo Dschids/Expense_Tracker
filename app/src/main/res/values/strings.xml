@@ -28,6 +28,7 @@
     <string name="add_btn">Add Expense</string>
 
     <string name="update_btn">Update Expense</string>
+    <string name="cancel_btn">Cancel</string>
 
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.expensetracker.fragments.speccatlist
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -15,7 +16,6 @@ class SpecCatListAdapter: RecyclerView.Adapter<SpecCatListAdapter.SpecCatViewHol
     class SpecCatViewHolder(val _spec_cat_binding: CustomSpecCatRowBinding): RecyclerView.ViewHolder(_spec_cat_binding.root) {
 
         fun specCatBind(ourItem: Expense){
-
 
             var dec = DecimalFormat("#,###.00")
             var formatted = dec.format(ourItem.amount)
@@ -50,10 +50,11 @@ class SpecCatListAdapter: RecyclerView.Adapter<SpecCatListAdapter.SpecCatViewHol
     }
 
     fun specCatSetData (expense: List<Expense>, selectedExpense: String){
-        var selectedExpenseList: ArrayList<Expense> = ArrayList()
+        var selectedExpenseList = ArrayList<Expense>()
         for (item in expense){
             if (item.expenseType == selectedExpense){
                 selectedExpenseList.add(item)
+                Log.i("TAG", "specCatSetData: $selectedExpenseList")
             }
         }
         this.expenseList = selectedExpenseList

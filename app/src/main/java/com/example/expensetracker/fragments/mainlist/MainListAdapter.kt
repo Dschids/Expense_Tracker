@@ -23,8 +23,7 @@ class MainListAdapter: RecyclerView.Adapter<MainListAdapter.MyViewHolder>() {
         fun bind(ourItem: ExpenseTypes, ourAmount: Double){
             var dec = DecimalFormat("#,###.00")
             var formatted = dec.format(ourAmount)
-            grandTotal += ourAmount
-            Log.d(TAG, "bind: $grandTotal")
+
             _binding.tvExpCat.text = ourItem.type
             _binding.tvTotalAmount.text = "$ $formatted"
         }
@@ -45,7 +44,6 @@ class MainListAdapter: RecyclerView.Adapter<MainListAdapter.MyViewHolder>() {
 
         holder.bind(currentItem, currentAmount)
 
-
         holder._binding.expCatLayout.setOnClickListener {
             // passing the data from the item in the list to the update fragment
             val action = MainListFragmentDirections.actionMainListFragmentToSpecCatListFragment(currentItem)
@@ -65,7 +63,6 @@ class MainListAdapter: RecyclerView.Adapter<MainListAdapter.MyViewHolder>() {
             if (item.expenseType == category.type){
                 total += item.amount
             }
-
         }
         return total
     }

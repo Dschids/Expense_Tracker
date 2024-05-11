@@ -1,10 +1,12 @@
 package com.example.expensetracker.fragments.mainlist
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,17 +49,48 @@ class MainListFragment : Fragment() {
             calculateTotal(expense)
         }
 
+        _main_list_binding.mainListToolbar.inflateMenu(R.menu.main_menu)
+        _main_list_binding.mainListToolbar.setTitle("Expense Categories")
+        _main_list_binding.mainListToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_delete -> {
+                    deleteAllUsers()
+                    true
+                }
+                else -> false
+            }
+        }
 
         return view
     }
     private fun calculateTotal(expenses: List<Expense>) {
         var total: Double = 0.00
         for (item in expenses) {
-            total = +item.amount
+            total += item.amount
         }
 
         var dec = DecimalFormat("#,###.00")
         var formatted = dec.format(total)
         _main_list_binding.tvTotExpense.text = "$ $formatted"
+    }
+
+    private fun deleteAllUsers() {
+        // create a alert dialog box
+        val builder = AlertDialog.Builder(requireContext())
+        // positive button appears as "yes", {_,_ shows that there will be two buttons
+        builder.setPositiveButton("Yes"){_,_->
+            eclUserViewModel.deleteAllUsers()
+            Toast.makeText(requireContext(),
+                "All entries deleted!",
+                Toast.LENGTH_SHORT).show()
+        }
+        // negative button selection does nothing but get rid of alert box
+        builder.setNegativeButton("No"){_,_ -> }
+        // title of the alert box
+        builder.setTitle("Delete all items?")
+        // message inside alert box above positive and negative buttons
+        builder.setMessage("Are you sure you want to delete all items?")
+        // create and show the alert box
+        builder.create().show()
     }
 }

@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/mainListFragment"
         android:name="com.example.expensetracker.fragments.mainlist.MainListFragment"
-        android:label="fragment_main_list"
-        tools:layout="@layout/fragment_main_list" >
+        android:label="Main List"
+        tools:layout="@layout/fragment_main_list">
         <action
             android:id="@+id/action_mainListFragment_to_addFragment"
             app:destination="@id/addFragment" />
@@ -20,8 +20,8 @@
     <fragment
         android:id="@+id/addFragment"
         android:name="com.example.expensetracker.fragments.add.AddFragment"
-        android:label="fragment_add"
-        tools:layout="@layout/fragment_add" >
+        android:label="Add Expense"
+        tools:layout="@layout/fragment_add">
         <action
             android:id="@+id/action_addFragment_to_mainListFragment"
             app:destination="@id/mainListFragment" />
@@ -29,8 +29,8 @@
     <fragment
         android:id="@+id/specCatListFragment"
         android:name="com.example.expensetracker.fragments.speccatlist.SpecCatListFragment"
-        android:label="fragment_spec_cat_list"
-        tools:layout="@layout/fragment_spec_cat_list" >
+        android:label="Specific Category"
+        tools:layout="@layout/fragment_spec_cat_list">
         <action
             android:id="@+id/action_specCatListFragment_to_mainListFragment"
             app:destination="@id/mainListFragment" />
@@ -44,8 +44,8 @@
     <fragment
         android:id="@+id/updateFragment"
         android:name="com.example.expensetracker.fragments.update.UpdateFragment"
-        android:label="fragment_update"
-        tools:layout="@layout/fragment_update" >
+        android:label="Update"
+        tools:layout="@layout/fragment_update">
         <action
             android:id="@+id/action_updateFragment_to_specCatListFragment"
             app:destination="@id/specCatListFragment" />

@@ -3,6 +3,8 @@ package com.example.expensetracker.fragments.add
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -29,8 +31,19 @@ class AddFragment : Fragment() {
         aExpenseViewModel = ViewModelProvider(this).get(ExpenseViewModel::class.java)
 
         _add_binding.btnAddExp.setOnClickListener {
-            insertDataToDatabase()
+            if (inputCheck()) {
+                insertDataToDatabase()
+            }
         }
+
+        _add_binding.btnAfCancel.setOnClickListener {
+            findNavController().navigate(R.id.action_addFragment_to_mainListFragment)
+        }
+
+        _add_binding.myToolbar.inflateMenu(R.menu.main_menu)
+        _add_binding.myToolbar.setTitle("Add Expense")
+        var delete_item = _add_binding.myToolbar.menu.findItem(R.id.menu_delete)
+        delete_item.isVisible = false
 
         return view
     }
@@ -42,22 +55,44 @@ class AddFragment : Fragment() {
         val amount = _add_binding.etExpAmount.text.toString().toDouble()
         val description = _add_binding.etExpDescr.text.toString()
 
-        // if there is data in all three boxes
-        if (inputCheck(expCategory, business, amount, description)){
-            // create a User object
-            val user = Expense(0, expCategory, business, amount, description)
-            // add data to database
-            aExpenseViewModel.addUser(user)
-            Toast.makeText(requireContext(), "Entry added", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_addFragment_to_mainListFragment)
-        }else{
-            Toast.makeText(requireContext(), "All fields must be filled", Toast.LENGTH_SHORT).show()
-        }
+        // create a User object
+        val user = Expense(0, expCategory, business, amount, description)
+        // add data to database
+        aExpenseViewModel.addUser(user)
+        Toast.makeText(requireContext(), "Entry added", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_addFragment_to_mainListFragment)
 
     }
 
-    private fun inputCheck(expCategory: String, busName: String, amount: Double, descr: String): Boolean {
-        return !(TextUtils.isEmpty(expCategory) && TextUtils.isEmpty(busName) && TextUtils.isEmpty(amount.toString()) && TextUtils.isEmpty(descr))
+    private fun inputCheck(): Boolean {
+        var busFilled = false
+        var amountFilled = false
+        var descrFilled = false
+
+        val business = _add_binding.etBusName.text.toString()
+        val amount = _add_binding.etExpAmount.text.toString()
+        val description = _add_binding.etExpDescr.text.toString()
+
+        if (business.isEmpty()) {
+            Toast.makeText(requireContext(), "Please enter a business name.", Toast.LENGTH_SHORT).show()
+            _add_binding.etBusName.requestFocus()
+        }else {
+            busFilled = true
+            if (amount.isEmpty()) {
+                Toast.makeText(requireContext(), "Please enter the expense amount", Toast.LENGTH_SHORT).show()
+                _add_binding.etExpAmount.requestFocus()
+            } else {
+                amountFilled = true
+                if (description.isEmpty()) {
+                    Toast.makeText(requireContext(), "Please enter an expense description", Toast.LENGTH_SHORT).show()
+                    _add_binding.etExpDescr.requestFocus()
+                } else {
+                    descrFilled = true
+                }
+
+            }
+        }
+        return (busFilled && amountFilled && descrFilled)
     }
 
 }
